@@ -22,12 +22,22 @@ const TagsBox = styled.div`
   margin-top: 10px;
 `;
 
-const PhotoItem = ({ id, tags, urls: { regular } }) => {
+const PhotoItem = ({
+  description,
+  alt_description,
+  id,
+  tags,
+  urls: { regular },
+}) => {
   const { openModal } = useContext(AppContext);
 
   return (
     <Wrapper>
-      <PhotoImg src={regular} onClick={() => openModal(id)} />
+      <PhotoImg
+        src={regular}
+        alt={description ?? alt_description}
+        onClick={() => openModal(id)}
+      />
       <TagsBox>
         {tags.map((tag) => (
           <TagButton key={tag.title} title={tag.title} />

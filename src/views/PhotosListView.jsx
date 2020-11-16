@@ -78,7 +78,7 @@ const PhotosListView = () => {
 
   const renderNoInfoMessage = !photosList.length ? (
     <NoResultBox>
-      <NoResultImg src={noRestulImg} alt="" />
+      <NoResultImg src={noRestulImg} alt="no result" />
       <NoResultInfo>No Result</NoResultInfo>
     </NoResultBox>
   ) : null;

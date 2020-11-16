@@ -155,7 +155,7 @@ const PhotoModal = () => {
       <Wrapper ref={modalRef}>
         <ModalHeader>
           <ProfileInfoBox>
-            <ProfileImage src={small} />
+            <ProfileImage src={small} alt={username} />
             <div>
               <UserName>{name}</UserName>
               <ProfileName>@{username}</ProfileName>
@@ -163,9 +163,9 @@ const PhotoModal = () => {
           </ProfileInfoBox>
           <CloseModalButton ref={closeBtnRef} />
         </ModalHeader>
-        <MainImg src={regular} />
+        <MainImg src={regular} alt={description ?? alt_description} />
         <ModalFooter>
-          <Place>{location}</Place>
+          <Place>{location ?? "unknown"}</Place>
           <Description>{description ?? alt_description}</Description>
         </ModalFooter>
       </Wrapper>
