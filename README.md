@@ -1,6 +1,6 @@
 ## Project Overview 🎉
 
-Copies unsplash site with searching photos (used Unsplash API)
+Copy unsplash site with searching photos (used Unsplash API)
 
 ## Tech/framework used 🔧
 
