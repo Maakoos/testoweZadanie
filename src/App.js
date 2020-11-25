@@ -7,8 +7,9 @@ import GlobalStyle from "styles/GlobalStyle";
 import MainView from "views/MainView";
 import PhotosListView from "views/PhotosListView";
 import PhotoModal from "components/PhotoModal";
+import Loader from "components/Loader";
 
-const YOUR_ACCESS_KEY = "jty9IJy1FPjKSFDIjecmWLZjB696nG8FNjx3IIOGutQ";
+const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
   const [photosList, setPhotosList] = useState([]);
@@ -18,14 +19,21 @@ function App() {
   const [photoInModal, setPhotoInModa] = useState();
   const [headingValue, setHeadingValue] = useState("");
   const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   const fetchData = async (number, photoName) => {
     setShowLoadMoreBtn(true);
+    setShowLoader(true);
+    document.body.style.overflow = "hidden";
     try {
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?page=${number}&query=${photoName}&client_id=${YOUR_ACCESS_KEY}`
+        `https://api.unsplash.com/search/photos?page=${number}&query=${photoName}&client_id=${WEATHER_API_KEY}`
       );
       if (response.ok) {
+        setTimeout(() => {
+          setShowLoader(false);
+          document.body.style.overflow = "visible";
+        }, 1000);
         const data = await response.json();
 
         if (data.results.length < 10) {
@@ -77,7 +85,7 @@ function App() {
   };
   return (
     <AppContext.Provider value={contextValue}>
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter basename={"/"}>
         <div className="App">
           <GlobalStyle />
           <Switch>
@@ -85,6 +93,7 @@ function App() {
             <Route path="/photos" component={PhotosListView} />
           </Switch>
           {modalIsVisible ? <PhotoModal /> : null}
+          {showLoader ? <Loader /> : null}
         </div>
       </HashRouter>
     </AppContext.Provider>
